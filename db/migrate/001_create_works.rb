@@ -5,7 +5,7 @@ class CreateWorks < ActiveRecord::Migration
       t.string :filename
       t.string :external_id
       t.integer :camera_model_id
-      t.timestamps
+      t.datetime :date_time
     end    
   end
   

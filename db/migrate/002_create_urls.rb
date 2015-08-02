@@ -5,7 +5,6 @@ class CreateUrls < ActiveRecord::Migration
       t.string :url_type
       t.string :link
       t.integer :work_id
-      t.timestamps
     end
   end
 
