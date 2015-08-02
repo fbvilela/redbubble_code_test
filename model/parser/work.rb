@@ -13,7 +13,9 @@ module Parser
     #element :exif, class: Exif
     element :model
     element :make
-    element :date_time
+    element :date_time do |element|
+      Time.parse( element )
+    end
 
     def persist
       camera_make_id =  CameraMake.find_or_create_by( name: make ).id
@@ -21,7 +23,12 @@ module Parser
       work = ::Work.find_or_initialize_by( external_id: external_id )
       work.camera_model_id = camera_model_id
       work.filename = filename
-      work.save
+      work.date_time = date_time
+      if work.save
+        urls.each do |url|
+          url.persist( work.id )
+        end
+      end
     end
   end
 end
