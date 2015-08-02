@@ -1,23 +1,21 @@
+Notes to self:
 
-I didn't want to just use the popular Nokogiri and manually parse the xml
-I like xml to object mapping. Have used happyMapper a lot in the past.
-Using sax-machine as objectxXML mapping. It uses a sax parser which I picked 'ox'. It claims to be the fastest
+Still a lot of work to do:
 
+pagination
+twitter bootstrap? I don't want to spend time writing css for it. But not sure if styles is desired by the examiners
+Rspec tests...
+organise all these 'require' things
 
-Sat arvo, night
-Analyse the problem
-play around with gems/try code
-write migrations
-model parsing
-Have the parsing working and saving in DB
-have a basic run thingy working
+refactor, refactor, refactor,
 
+better outputs and fail checks needed.
 
-Sunday morning
-template generation
-pagination( so far, I haven't thought about it... it worries me a little )
+Got to the point where it works even though it's kinda rough
 
-Sunday arvo - evening
-Tests - Read on Rspec testing. brush up skills
-README File
-push and pray
+test if output folder is one of the project folders
+test if output folder is empty
+ Erase output folder
+
+ About pagination
+ will separate pages into divs that will be hidden/shown via javascript
