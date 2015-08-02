@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= camera_make.name %></title>
+    <style type="text/css">
+        nav {
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+<header>
+  <h1><%= camera_make.name %></h1>
+
+  <nav class="navbar navbar-default">
+    <ul class="nav navbar-nav">
+      <li><a href="index.html">All Camera Makes</a></li>
+      <% camera_make.camera_models.each do |camera_model| %>
+          <li><a href="camera_model_<%=camera_model.id %>.html"><%= camera_model.name %></a></li>
+      <% end %>
+    </ul>
+  </nav>
+</header>
+  <ul>
+    <% camera_make.latest_works.each do |work| %>
+      <li>
+        <img src="<%= work.thumbnail_url %>"/>
+      </li>
+    <% end %>
+  </ul>
+</body>
+</html>

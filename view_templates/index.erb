@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Index</title>
+  <style type="text/css">
+      nav {
+          margin: 10px;
+      }
+  </style>
+</head>
+<body>
+<header>
+  <h1>Index - Camera Makes</h1>
+
+  <nav class="navbar navbar-default">
+    <ul class="nav navbar-nav">
+      <% CameraMake.find_each do |camera_make| %>
+        <li><a href="camera_make_<%= camera_make.id %>.html"><%= camera_make.name %></a></li>
+      <% end %>
+    </ul>
+  </nav>
+</header>
+<ul>
+  <% Work.latest.each do |work| %>
+      <li>
+        <img src="<%= work.thumbnail_url %>"/>
+      </li>
+  <% end %>
+</ul>
+</body>
+</html>
