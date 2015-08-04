@@ -2,20 +2,13 @@ Notes to self:
 
 Still a lot of work to do:
 
-pagination
-twitter bootstrap? I don't want to spend time writing css for it. But not sure if styles is desired by the examiners
 Rspec tests...
 organise all these 'require' things
 
 refactor, refactor, refactor,
 
 better outputs and fail checks needed.
-
-Got to the point where it works even though it's kinda rough
-
 test if output folder is one of the project folders
 test if output folder is empty
- Erase output folder
+Erase output folder
 
- About pagination
- will separate pages into divs that will be hidden/shown via javascript
