@@ -1,0 +1,16 @@
+nav {
+  margin: 10px;
+}
+span.active {
+  display: inline;
+}
+span.inactive {
+  display: none;
+}
+li {
+  float: left;
+  margin: 10px;
+}
+ul {
+  list-style-type: none;
+}
