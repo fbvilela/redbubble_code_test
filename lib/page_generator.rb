@@ -2,7 +2,35 @@ require 'fileutils'
 class PageGenerator
 
   attr_accessor :output_folder
+  
+  def per_page
+    10
+  end
+    
+  def include_basic_css
+    application_css = File.new( File.join( 'view_templates', 'css', 'application.css') ).read
+    <<-EOS
+      <style type="text/css">
+        #{application_css}
+      </style>
+    EOS
+  end
 
+  def include_jquery_js
+    <<-EOS
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    EOS
+  end
+
+  def include_pagination_js
+    application_js = File.new(File.join('view_templates', 'javascript', 'application.js' ) ).read
+    <<-EOS
+      <script type="text/javascript">
+        #{application_js}
+      </script>
+    EOS
+  end
+  
   def initialize( output_folder )
     @output_folder = output_folder
   end
@@ -37,5 +65,7 @@ class PageGenerator
     FileUtils.makedirs( output_folder ) unless File.exist?(output_folder)
     File.open( File.join( output_folder, page_name ), 'w' ){ |f| f.write( content ) }
   end
+
+
 
 end
