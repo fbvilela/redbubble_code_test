@@ -2,28 +2,32 @@
 <html>
 <head>
   <title><%= camera_model.name %></title>
-  <style type="text/css">
-      nav {
-          margin: 10px;
-      }
-  </style>
+  <%= include_basic_css %>
 </head>
 <body>
-<header>
-  <h1><%= camera_model.name %></h1>
-  <nav class="navbar navbar-default">
-    <ul class="nav navbar-nav">
-      <li><a href="index.html">All Camera Makes</a></li>
-      <li><a href="camera_make_<%= camera_model.camera_make.id %>.html"><%= camera_model.camera_make.name %> models</a></li>
-    </ul>
-  </nav>
-</header>
-  <ul>
-  <% camera_model.works.each do |work| %>
-      <li>
-        <img src="<%= work.thumbnail_url %>"/>
-      </li>
+  <header>
+    <h1><%= camera_model.name %></h1>
+    <nav>
+      <a href="#" class="prev">Previous page |</a>
+      <a href="index.html">All Camera Makes |</a>
+      <a href="camera_make_<%= camera_model.camera_make.id %>.html">All <%= camera_model.camera_make.name %> Models</a>
+      <a href="#" class="next"> | Next page</a>
+    </nav>
+  </header>
+  
+  <% camera_model.works.find_in_batches( batch_size: per_page ).with_index do |batch, index| %>
+    <span class="page <%= index == 0 ? 'active' : 'inactive'  %>" data-page="<%= index %>">
+      <ul>
+        <% batch.each do |work| %>
+          <li>
+            <img src="<%= work.thumbnail_url %>"/>
+          </li>
+        <% end %>
+      </ul>  
+    </span>
   <% end %>
-</ul>
+  
+  <%= include_jquery_js %>
+  <%= include_pagination_js %>
 </body>
 </html>

@@ -2,30 +2,32 @@
 <html>
 <head>
   <title>Index</title>
-  <style type="text/css">
-      nav {
-          margin: 10px;
-      }
-  </style>
+  <%= include_basic_css %>
 </head>
 <body>
-<header>
-  <h1>Index - Camera Makes</h1>
-
-  <nav class="navbar navbar-default">
-    <ul class="nav navbar-nav">
-      <% CameraMake.find_each do |camera_make| %>
-        <li><a href="camera_make_<%= camera_make.id %>.html"><%= camera_make.name %></a></li>
-      <% end %>
-    </ul>
-  </nav>
-</header>
-<ul>
-  <% Work.latest.each do |work| %>
+  <header>
+    <h1>Index - Camera Makes</h1>
+    <nav>
+      <a href="#" class="prev">Previous page |</a>
+        <% CameraMake.find_in_batches(batch_size: per_page).with_index do |batch, index| %>
+          <span class="page <%= index == 0 ? 'active' : 'inactive'  %>" data-page="<%= index %>">
+            <% batch.each do |camera_make| %>
+              <a href="camera_make_<%= camera_make.id %>.html"><%= camera_make.name %></a> |
+            <% end %>
+          </span>
+        <% end %>
+      <a href="#" class="next"> Next page</a>
+    </nav>
+  </header>
+  <ul>
+    <% Work.latest.each do |work| %>
       <li>
         <img src="<%= work.thumbnail_url %>"/>
       </li>
-  <% end %>
-</ul>
+    <% end %>
+  </ul>
+  <%= include_jquery_js %>
+  <%= include_pagination_js %>
 </body>
 </html>
+

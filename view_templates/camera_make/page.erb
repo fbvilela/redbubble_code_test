@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title><%= camera_make.name %></title>
-    <style type="text/css">
-        nav {
-            margin: 10px;
-        }
-    </style>
+  <title><%= camera_make.name %></title>
+  <%= include_basic_css %>
 </head>
 <body>
-<header>
-  <h1><%= camera_make.name %></h1>
-
-  <nav class="navbar navbar-default">
-    <ul class="nav navbar-nav">
-      <li><a href="index.html">All Camera Makes</a></li>
-      <% camera_make.camera_models.each do |camera_model| %>
-          <li><a href="camera_model_<%=camera_model.id %>.html"><%= camera_model.name %></a></li>
-      <% end %>
-    </ul>
-  </nav>
-</header>
+  <header>
+    <h1><%= camera_make.name %></h1>
+    <nav>
+      <a href="#" class="prev">Previous page |</a>
+      <a href="index.html">All Camera Makes |</a>
+        <% camera_make.camera_models.find_in_batches(batch_size: per_page).with_index do |batch, index| %>
+          <span class="page <%= index == 0 ? 'active' : 'inactive'  %>" data-page="<%= index %>">
+            <% batch.each do |camera_model| %>
+              <a href="camera_model_<%= camera_model.id %>.html"><%= camera_model.name %></a> |
+            <% end %>
+          </span>
+        <% end %>
+      <a href="#" class="next"> Next page</a>
+    </nav>
+  </header>
   <ul>
     <% camera_make.latest_works.each do |work| %>
       <li>
@@ -28,5 +27,8 @@
       </li>
     <% end %>
   </ul>
+  <%= include_jquery_js %>
+  <%= include_pagination_js %>
 </body>
 </html>
+
