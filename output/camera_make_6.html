@@ -1,26 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Panasonic</title>
-    <style type="text/css">
+  <title>Panasonic</title>
+        <style type="text/css">
         nav {
-            margin: 10px;
-        }
-    </style>
+  margin: 10px;
+}
+span.active {
+  display: inline;
+}
+span.inactive {
+  display: none;
+}
+li {
+  float: left;
+  margin: 10px;
+}
+ul {
+  list-style-type: none;
+}
+      </style>
+
 </head>
 <body>
-<header>
-  <h1>Panasonic</h1>
-
-  <nav class="navbar navbar-default">
-    <ul class="nav navbar-nav">
-      <li><a href="index.html">All Camera Makes</a></li>
-      
-          <li><a href="camera_model_6.html">DMC-FZ30</a></li>
-      
-    </ul>
-  </nav>
-</header>
+  <header>
+    <h1>Panasonic</h1>
+    <nav>
+      <a href="#" class="prev">Previous page |</a>
+      <a href="index.html">All Camera Makes |</a>
+        
+          <span class="page active" data-page="0">
+            
+              <a href="camera_model_6.html">DMC-FZ30</a> |
+            
+          </span>
+        
+      <a href="#" class="next"> Next page</a>
+    </nav>
+  </header>
   <ul>
     
       <li>
@@ -32,5 +49,52 @@
       </li>
     
   </ul>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+        <script type="text/javascript">
+        /**receives the page I am viewing as an argument ( starts from 0 )*/
+function hide_or_show_page_links(page_number){
+ console.log( page_number); 
+ next_page = page_number + 1;  
+ next_page_exists = $('[data-page='+ next_page +']').length != 0
+ console.log( !next_page_exists );
+ if( page_number == 0 ){ 
+  $('.prev').hide();
+ } else {
+  $('.prev').show();
+ }
+if( !next_page_exists ){ 
+  $('.next').hide();   
+ } else {
+  $('.next').show();
+ }    
+}
+
+function movePage( operation ){
+  current_page = $('.active');
+  //if it's ok to change pages
+  current_page_number = current_page.data('page');
+  desired_page = current_page_number + operation;
+  if( $('[data-page='+ desired_page +']').length ) {
+    $('[data-page=' + current_page_number + ']').removeClass('active').addClass('inactive');
+    $('[data-page=' + desired_page + ']').removeClass('inactive').addClass('active');
+    hide_or_show_page_links(desired_page);
+  }
+}
+
+$('.next').click(function(){
+  movePage( 1 );
+});
+
+$('.prev').click( function(){
+  movePage( -1 );
+});
+/**
+ on page 1 it should not display the previous page link.
+*/
+hide_or_show_page_links(0); 
+      </script>
+
 </body>
 </html>
+
