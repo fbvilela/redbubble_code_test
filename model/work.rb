@@ -10,6 +10,6 @@ class Work < ActiveRecord::Base
     urls.where( url_type: 'small' ).first.link
   end
 
-  scope :latest, -> { order( 'date_time desc' )}
+  scope :latest, -> { order( 'date_time desc' ).limit(10) }
 
 end
