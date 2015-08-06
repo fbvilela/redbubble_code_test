@@ -49,7 +49,6 @@ class PageGenerator
   end
 
   def generate_camera_models
-    generate_page_for( CameraModel, 'camera_model')
     CameraModel.find_each do |camera_model|
       generated_page = ERB.new(File.new(File.join('lib','view_templates', 'camera_model', 'page.erb')).read ).result( binding )
       page_name = "camera_model_#{camera_model.id}.html"
