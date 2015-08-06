@@ -1,8 +1,5 @@
-require 'rubygems'
-require 'active_record'
-require_relative 'model/parser/works_parser'
-require 'erb'
-require_relative 'lib/page_generator'
+require_relative 'redbubble_code_test'
+
 ActiveRecord::Base.logger = Logger.new(File.open('database.log', 'w'))
 ActiveRecord::Base.establish_connection(
   adapter:  "sqlite3",

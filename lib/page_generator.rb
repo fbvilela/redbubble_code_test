@@ -8,7 +8,7 @@ class PageGenerator
   end
     
   def include_basic_css
-    application_css = File.new( File.join( 'view_templates', 'css', 'application.css') ).read
+    application_css = File.new( File.join( 'lib', 'view_templates', 'css', 'application.css') ).read
     <<-EOS
       <style type="text/css">
         #{application_css}
@@ -23,7 +23,7 @@ class PageGenerator
   end
 
   def include_pagination_js
-    application_js = File.new(File.join('view_templates', 'javascript', 'application.js' ) ).read
+    application_js = File.new(File.join( 'lib', 'view_templates', 'javascript', 'application.js' ) ).read
     <<-EOS
       <script type="text/javascript">
         #{application_js}
@@ -36,29 +36,25 @@ class PageGenerator
   end
 
   def generate_index
-    generated_page = ERB.new(File.new('view_templates/index.erb').read ).result( binding )
+    generated_page = ERB.new(File.new( File.join('lib','view_templates', 'index.erb')).read ).result( binding )
     write( generated_page, 'index.html' )
   end
 
   def generate_camera_makes
     CameraMake.find_each do |camera_make|
-      generated_page = ERB.new(File.new('view_templates/camera_make/page.erb').read ).result( binding )
+      generated_page = ERB.new(File.new(File.join('lib','view_templates','camera_make','page.erb')).read ).result( binding )
       page_name = "camera_make_#{camera_make.id}.html"
       write( generated_page, page_name )
     end
   end
 
   def generate_camera_models
+    generate_page_for( CameraModel, 'camera_model')
     CameraModel.find_each do |camera_model|
-      generated_page = ERB.new(File.new('view_templates/camera_model/page.erb').read ).result( binding )
+      generated_page = ERB.new(File.new(File.join('lib','view_templates', 'camera_model', 'page.erb')).read ).result( binding )
       page_name = "camera_model_#{camera_model.id}.html"
       write( generated_page, page_name )
     end
-  end
-
-  def generate_page_for_model( model )
-    #Will refactor the generator later... make it Dry er.
-    #page_name = model.class.
   end
 
   def write( content, page_name )
