@@ -15,18 +15,14 @@
     </nav>
   </header>
   
-  <% camera_model.works.find_in_batches( batch_size: per_page ).with_index do |batch, index| %>
-    <span class="page <%= index == 0 ? 'active' : 'inactive'  %>" data-page="<%= index %>">
-      <ul>
-        <% batch.each do |work| %>
-          <li>
-            <img src="<%= work.thumbnail_url %>"/>
-          </li>
-        <% end %>
-      </ul>  
-    </span>
-  <% end %>
-  
+  <% camera_model.works.each.with_index do |work, index| %>
+    <% page = (index/per_page)  %> 
+    <ul>
+      <li class="<%= page == 0 ? 'active' : 'inactive'  %>" data-page="<%= page %>" >
+        <img src="<%= work.thumbnail_url %>"/>
+      </li>
+    </ul>  
+   <% end %>
   <%= include_jquery_js %>
   <%= include_pagination_js %>
 </body>

@@ -1,10 +1,10 @@
 nav {
   margin: 10px;
 }
-span.active {
+.active {
   display: inline;
 }
-span.inactive {
+.inactive {
   display: none;
 }
 li {
