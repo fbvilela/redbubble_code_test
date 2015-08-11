@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'active_record'
-require_relative 'lib/model/parser/works_parser'
 require 'erb'
+require_relative 'lib/model/parser/works_parser'
 require_relative 'lib/page_generator'
+require_relative 'lib/task_wrapper'
