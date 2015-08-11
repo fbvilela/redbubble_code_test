@@ -57,7 +57,6 @@ class PageGenerator
   end
 
   def write( content, page_name )
-    FileUtils.makedirs( output_folder ) unless File.exist?(output_folder)
     File.open( File.join( output_folder, page_name ), 'w' ){ |f| f.write( content ) }
   end
 
